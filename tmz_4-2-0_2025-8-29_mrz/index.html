@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择客户端版本</title>
+    <style>
+        body {
+            background: url("img/bc1.png") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .mohu {
+            backdrop-filter: blur(30px);
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: #000000;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin: 20px 0;
+            color: #c70f0f;
+            font-size: 1.2rem;
+        }
+
+        .button {
+            border: 0;
+            border-radius: 0.8cm;
+            width: 180px;
+            height: 50px;
+            background-color: orangered;
+            color: #ffffff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .button:hover {
+            background-color: darkorange;
+        }
+
+        .select-container {
+            display: none;
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var userAgent = navigator.userAgent;
+            var userLanguage = navigator.language || navigator.userLanguage;
+
+            var isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(userAgent);
+            var isChinese = userLanguage.toLowerCase().includes('zh');
+
+            let redirectPath = '';
+
+            if (isMobile) {
+                redirectPath = isChinese ? "phone_cn-zh.html" : "phone_en.html";
+            } else {
+                redirectPath = isChinese ? "pc.html" : "pc_en.html";
+            }
+            window.location.replace(redirectPath);
+            setTimeout(function() {
+                document.getElementById('loadingMessage').style.display = 'none';
+                document.getElementById('fallbackMessage').style.display = 'block';
+                document.querySelector('.select-container').style.display = 'flex';
+            }, 300);
+        });
+
+        function redirectToClient(device, language) {
+            let path = '';
+            if (device === 'mobile') {
+               path = language === 'en' ? "phone.html" : "phone.html";
+            } else {
+               path = language === 'en' ? "pc.html" : "pc.html";
+            }
+            window.location.href = path;
+        }
+    </script>
+</head>
+<body>
+    <div class="mohu">
+        <h1 id="loadingMessage">
+            <strong>正在检测设备和语言，请稍等...（by.沐月）<br>Detecting device and language, please wait... (by. Mu Yue)</strong>
+        </h1>
+        <p id="fallbackMessage" style="display:none;">
+            如果自动检测失败，请手动选择您的客户端版本和语言：<br>If automatic detection fails, please manually select your client version and language:
+        </p>
+
+        <div class="select-container">
+            <button class="button" onclick="redirectToClient('mobile', 'zh')">手机端 (中文)</button>
+            <button class="button" onclick="redirectToClient('mobile', 'en')">Mobile (English)</button>
+            <button class="button" onclick="redirectToClient('pc', 'zh')">电脑端 (中文)</button>
+            <button class="button" onclick="redirectToClient('pc', 'en')">Desktop (English)</button>
+        </div>
+    </div>
+</body>
+</html>
