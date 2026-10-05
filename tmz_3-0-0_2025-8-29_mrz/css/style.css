@@ -1,0 +1,78 @@
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --border-color: #dddddd;
+  --button-background: #f0f0f0;
+  --button-text: #000000;
+  --mdui-color-primary: var(--mdui-color-error) !important;
+}
+
+.mdui-theme-light {
+  
+  --text-color: #000000;
+  --border-color: #dddddd;
+  --button-background: #f0f0f0;
+  --button-text: #000000;
+}
+
+.mdui-theme-dark {
+  
+  --text-color: #ffffff;
+  --border-color: #444444;
+  --button-background: #333333;
+  --button-text: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  .mdui-theme-auto {
+    --background-color: #000000;
+    --text-color: #ffffff;
+    --border-color: #444444;
+    --button-background: #333333;
+    --button-text: #ffffff;
+  }
+}
+
+html, body {
+  margin: 0px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.6s, color 0.6s;
+}
+
+.container {
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--background-color);
+  transition: background-color 0.4s, border-color 0.4s;
+}
+
+.mdui-button, .mdui-chip {
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--button-background);
+  color: var(--button-text);
+}
+
+.mdui-button img {
+  width: 24px;
+  height: 24px;
+}
+
+.app-title {
+  margin-right: auto;
+}
+
+.theme-toggle-btn {
+  margin-left: auto;
+}
+.mdui-tabs {
+  border-radius: 16px; /* 设置圆角大小 */
+}
